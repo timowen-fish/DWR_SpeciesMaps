@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:transparent;}</style>
+
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Muskellunge Species Map</title>
+  <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: transparent;
+        font-family: Arial, sans-serif;
+      }
+
+      #wrap {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      #panel-frame {
+        width: 100%;
+        border: none;
+        display: block;
+        flex: 0 0 auto;
+      }
+
+      #map-frame {
+        width: 100%;
+        border: none;
+        display: block;
+        flex: 1 1 auto;
+        min-height: 0;
+      }
+    </style>
+  <script>
+      function setPanelHeight(h) {
+        var panel = document.getElementById('panel-frame');
+        if (!panel) return;
+        panel.style.height = Math.max(120, h) + 'px';
+      }
+
+      window.addEventListener('message', function(event) {
+        if (!event.data || event.data.type !== 'musky_panel_height') return;
+        setPanelHeight(event.data.height);
+      });
+
+      window.addEventListener('load', function() {
+        setPanelHeight(260);
+      });
+    </script>
+</head>
+<html>
+  <body>
+    <div id="wrap">
+      <iframe id="panel-frame" src="Muskellunge_panel.html" scrolling="no"></iframe>
+      <iframe id="map-frame" src="Muskellunge_map.html"></iframe>
+    </div>
+  </body>
+</html>
+</html>
